@@ -19,18 +19,18 @@ def verify_student():
             for student in search_result:
                 if student.get("nim") == nim:
                     detail = client.get_detail_mhs(student["id"])
+                    print(detail)
                     return jsonify({
                         "status": "success",
                         "data": {
                             "name": detail.get("nama", "Not available"),
                             "nim": detail.get("nim", "Not available"),
-                            "mother_name": detail.get("nama_ibu", "Not available"),
-                            "birth_place": detail.get("tempat_lahir", "Not available"),
-                            "birth": detail.get("tanggal_lahir", "Not available"),
+                            "jenis_kelamin":detail.get("jenis_kelamin","Not available"),
+                            "jenis_daftar": detail.get("jenis_daftar", "Not available"),
                             "nama_pt": detail.get("nama_pt", "Not available"),
-                            "nama_prodi": detail.get("nama_prodi", "Not available"),
+                            "nama_prodi": detail.get("prodi", "Not available"),
                             "jenjang": detail.get("jenjang", "Not available"),
-                            "tahun_masuk": detail.get("tahun_masuk", "Not available"),
+                            "tanggal_masuk": detail.get("tanggal_masuk", "Not available"),
                             "status": detail.get("status_saat_ini", "Not available"),
                         }
                     })
