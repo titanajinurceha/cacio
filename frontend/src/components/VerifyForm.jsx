@@ -42,16 +42,19 @@ const VerifyForm = () => {
     <div className="min-h-screen flex items-center justify-center font-sans">
       <form
         onSubmit={handleSubmit}
-        className="bg-white border-3 shadow-[3px_3px_0px_rgba(0,0,0,1)] border-black rounded-2xl p-8 w-full max-w-md"
+        className="bg-white border-3 shadow-[0px_3px_0px_rgba(0,0,0,1)] border-black rounded-2xl p-8 w-full max-w-md"
       >
-        <h2 className="text-3xl font-black mb-6 text-black text-center">
+        <h2 className="text-3xl font-black text-black text-center">
           Verify Your Information
+        </h2>
+        <h2 className="text-xl font-medium mb-4 text-gray-600 text-center">
+          One more step
         </h2>
 
         {/* Nama */}
         <div className="m-5">
           <label htmlFor="nama">
-            <span className="text-sm font-semibold text-black"> NAMA </span>
+            <span className="text-sm pl-2 font-semibold text-black"> NAMA </span>
             <input
               type="text"
               name="nama"
@@ -68,7 +71,7 @@ const VerifyForm = () => {
         {/* NIM */}
         <div className="m-5">
           <label htmlFor="nim">
-            <span className="text-sm font-semibold text-black"> NIM </span>
+            <span className="text-sm pl-2 font-semibold text-black"> NIM </span>
             <input
               type="text"
               name="nim"
@@ -121,7 +124,11 @@ const VerifyForm = () => {
             )}
             <button
               onClick={() => setShowModal(false)}
-              className="mt-4 px-4 py-2 border-2 border-black bg-[#ffdb58] mx-auto block text-black text-center rounded"
+              className="bg-[#ffdb58] w-2/5 mt-4 mx-auto block border-2 border-black
+              shadow-[0px_2px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[0px_4px_0px_rgba(0,0,0,1)] 
+              active:-translate-y-0 disabled:-translate-y-0
+              active:shadow-[0px_2px_0px_rgba(0,0,0,1)] disabled:shadow-[0px_2px_0px_rgba(0,0,0,1)]
+            text-black font-semibold py-2.5 px-4 rounded-full transition duration-300 disabled:opacity-50"
             >
               Close
             </button>
