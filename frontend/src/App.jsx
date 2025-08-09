@@ -12,9 +12,9 @@ function App() {
           gap={15}
           baseColor="#5227FF"
           activeColor="#5227FF"
-          proximity={120}
-          shockRadius={250}
-          shockStrength={5}
+          proximity={40}
+          shockRadius={0}
+          shockStrength={0}
           resistance={750}
           returnDuration={1.5}
         />

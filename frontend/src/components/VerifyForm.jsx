@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import gsap from "gsap";
 
 const VerifyForm = () => {
   const [formData, setFormData] = useState({ nama: "", nim: "" });
@@ -36,6 +37,25 @@ const VerifyForm = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    if (showModal) {
+      gsap.fromTo(
+        ".modal",
+        { opacity: 0, y: 100 },
+        { opacity: 1, y: 0, duration: 1, ease: "elastic", }
+      );
+    }
+  }, [showModal]);
+
+  const handleClose = () => {
+    gsap.to(".modal", {
+      opacity: 0,
+      y: 100,
+      duration: 0.2,
+      onComplete: () => setShowModal(false) // only hide after animation finishes
+    });
   };
 
   return (
@@ -99,7 +119,7 @@ const VerifyForm = () => {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="modal fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white border-3 border-black shadow-[0px_2px_0px_rgba(0,0,0,1)] p-6 text-black rounded-xl w-96">
             {result?.status === "success" ? (
               <>
@@ -123,7 +143,7 @@ const VerifyForm = () => {
               </>
             )}
             <button
-              onClick={() => setShowModal(false)}
+              onClick={handleClose}
               className="bg-[#ffdb58] w-2/5 mt-4 mx-auto block border-2 border-black
               shadow-[0px_2px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[0px_4px_0px_rgba(0,0,0,1)] 
               active:-translate-y-0 disabled:-translate-y-0
