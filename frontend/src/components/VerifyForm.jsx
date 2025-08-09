@@ -3,6 +3,7 @@ import gsap from "gsap";
 
 const VerifyForm = () => {
   const [formData, setFormData] = useState({ nama: "", nim: "" });
+  const [formErrors, setFormErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -10,10 +11,20 @@ const VerifyForm = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear error while typing
+    setFormErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const errors = {};
+    if (!formData.nama.trim()) errors.nama = "Nama wajib diisi";
+    if (!formData.nim.trim()) errors.nim = "NIM wajib diisi";
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
     setLoading(true);
     setResult(null);
 
@@ -44,7 +55,7 @@ const VerifyForm = () => {
       gsap.fromTo(
         ".modal",
         { opacity: 0, y: 100 },
-        { opacity: 1, y: 0, duration: 1, ease: "elastic", }
+        { opacity: 1, y: 0, duration: 0.6, ease: "elastic.out(1,0.5)", }
       );
     }
   }, [showModal]);
@@ -53,7 +64,7 @@ const VerifyForm = () => {
     gsap.to(".modal", {
       opacity: 0,
       y: 100,
-      duration: 0.2,
+      duration: 0.3,
       onComplete: () => setShowModal(false) // only hide after animation finishes
     });
   };
@@ -74,34 +85,42 @@ const VerifyForm = () => {
         {/* Nama */}
         <div className="m-5">
           <label htmlFor="nama">
-            <span className="text-sm pl-2 font-semibold text-black"> NAMA </span>
+            <span className="text-sm pl-2 font-semibold text-black"> NAMA<span className="text-[#ff4911]">*</span> </span>
             <input
               type="text"
               name="nama"
               id="nama"
               value={formData.nama}
               onChange={handleChange}
-              required
-              className="text-black font-medium px-4 py-3 mt-0.5 w-full rounded-xl border-3 border-black shadow-[0px_3px_0px_rgba(0,0,0,1)] sm:text-sm"
+              className={`text-black font-medium px-4 py-3 mt-0.5 w-full rounded-xl border-3 shadow-[0px_3px_0px_rgba(0,0,0,1)] sm:text-sm
+                ${formErrors.nama ? "border-[#ff4911]" : "border-black"}
+                focus:bg-[#FFA6F6]`}
               placeholder="Masukkan Nama"
             />
+            {formErrors.nama && (
+            <p className="text-[#ff4911] pl-2 text-xs mt-1">{formErrors.nama}</p>
+          )}
           </label>
         </div>
 
         {/* NIM */}
         <div className="m-5">
           <label htmlFor="nim">
-            <span className="text-sm pl-2 font-semibold text-black"> NIM </span>
+            <span className="text-sm pl-2 font-semibold text-black"> NIM<span className="text-[#ff4911]">*</span> </span>
             <input
               type="text"
               name="nim"
               id="nim"
               value={formData.nim}
               onChange={handleChange}
-              required
-              className="text-black font-medium px-4 py-3 mt-0.5 w-full rounded-xl border-3 border-black shadow-[0px_3px_0px_rgba(0,0,0,1)] sm:text-sm"
+              className={`text-black font-medium px-4 py-3 mt-0.5 w-full rounded-xl border-3 shadow-[0px_3px_0px_rgba(0,0,0,1)] sm:text-sm
+                ${formErrors.nim ? "border-[#ff4911]" : "border-black"}
+                focus:bg-[#FFA6F6]`}
               placeholder="Masukkan NIM"
             />
+            {formErrors.nim && (
+            <p className="text-[#ff4911] pl-2 text-xs mt-1">{formErrors.nim}</p>
+          )}
           </label>
         </div>
         <button

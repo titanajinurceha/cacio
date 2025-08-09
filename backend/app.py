@@ -13,13 +13,11 @@ def verify_student():
 
     with api() as client:
         search_result = client.search_mahasiswa(name)
-        print(search_result)
 
         if search_result:  # Just check if the list is not empty
             for student in search_result:
                 if student.get("nim") == nim:
                     detail = client.get_detail_mhs(student["id"])
-                    print(detail)
                     return jsonify({
                         "status": "success",
                         "data": {
