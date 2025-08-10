@@ -139,7 +139,7 @@ const VerifyForm = () => {
       {/* Modal */}
       {showModal && (
         <div className="modal fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white border-3 border-black shadow-[0px_2px_0px_rgba(0,0,0,1)] p-6 text-black rounded-xl w-96">
+          <div className="bg-[#F75B2B] border-3 border-black shadow-[0px_2px_0px_rgba(0,0,0,1)] p-6 text-white rounded-xl w-96">
             {result?.status === "success" ? (
               <>
                 <h3 className="text-xl text-center font-bold mb-4">Verification Success</h3>
@@ -158,16 +158,16 @@ const VerifyForm = () => {
             ) : (
               <>
                 <h3 className="text-xl text-center font-bold mb-4">Verification Failed</h3>
-                <p className="text-red-600 text-center">Data tidak cocok</p>
+                <p className="text-white text-center">Data tidak cocok</p>
               </>
             )}
             <button
               onClick={handleClose}
-              className="bg-[#ffdb58] w-2/5 mt-4 mx-auto block border-2 border-black
+              className="bg-black w-2/5 mt-4 mx-auto block border-2 border-black
               shadow-[0px_2px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[0px_4px_0px_rgba(0,0,0,1)] 
               active:-translate-y-0 disabled:-translate-y-0
               active:shadow-[0px_2px_0px_rgba(0,0,0,1)] disabled:shadow-[0px_2px_0px_rgba(0,0,0,1)]
-            text-black font-semibold py-2.5 px-4 rounded-full transition duration-300 disabled:opacity-50"
+            text-white font-semibold py-2.5 px-4 rounded-full transition duration-300 disabled:opacity-50"
             >
               Close
             </button>

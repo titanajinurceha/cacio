@@ -1,6 +1,7 @@
 import './App.css'
 import VerifyForm from './components/VerifyForm';
 import DotGrid from '../reactbits/DotGrid/DotGrid';
+import graduationImg from './assets/graduation.svg';
 
 function App() {
   return (
@@ -24,6 +25,13 @@ function App() {
       <div className="relative z-10 flex items-center justify-center h-full">
         <VerifyForm />
       </div>
+
+      {/* Decorative Image */}
+      <img
+        src={graduationImg}
+        alt="Graduation"
+        className="hidden min-[1200px]:w-100 min-[950px]:block fixed bottom-0 right-0 w-64 h-auto select-none pointer-events-none"
+      />
     </div>
   );
 }
