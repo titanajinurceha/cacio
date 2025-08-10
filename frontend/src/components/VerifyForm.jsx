@@ -92,7 +92,7 @@ const VerifyForm = () => {
               id="nama"
               value={formData.nama}
               onChange={handleChange}
-              className={`text-black font-medium px-4 py-3 mt-0.5 w-full rounded-xl border-3 shadow-[0px_3px_0px_rgba(0,0,0,1)] sm:text-sm
+              className={`text-black font-medium bg-white px-4 py-3 mt-0.5 w-full rounded-xl border-3 shadow-[0px_3px_0px_rgba(0,0,0,1)] sm:text-sm
                 ${formErrors.nama ? "border-[#ff4911]" : "border-black"}
                 focus:bg-[#FFA6F6]`}
               placeholder="Masukkan Nama"
@@ -113,7 +113,7 @@ const VerifyForm = () => {
               id="nim"
               value={formData.nim}
               onChange={handleChange}
-              className={`text-black font-medium px-4 py-3 mt-0.5 w-full rounded-xl border-3 shadow-[0px_3px_0px_rgba(0,0,0,1)] sm:text-sm
+              className={`text-black bg-white font-medium px-4 py-3 mt-0.5 w-full rounded-xl border-3 shadow-[0px_3px_0px_rgba(0,0,0,1)] sm:text-sm
                 ${formErrors.nim ? "border-[#ff4911]" : "border-black"}
                 focus:bg-[#FFA6F6]`}
               placeholder="Masukkan NIM"
@@ -126,7 +126,7 @@ const VerifyForm = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-2/5 mx-auto block border-2 border-black bg-[#ffdb58]
+          className="w-2/5 mx-auto block border-2 border-black bg-[#FFC730]
           shadow-[0px_2px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[0px_4px_0px_rgba(0,0,0,1)] 
           active:-translate-y-0 disabled:-translate-y-0
           active:shadow-[0px_2px_0px_rgba(0,0,0,1)] disabled:shadow-[0px_2px_0px_rgba(0,0,0,1)]

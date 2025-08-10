@@ -8,15 +8,15 @@ function App() {
       {/* Fullscreen DotGrid */}
       <div className="absolute inset-0 -z-10">
         <DotGrid
-          dotSize={8}
+          dotSize={3}
           gap={15}
           baseColor="#5227FF"
           activeColor="#5227FF"
-          proximity={40}
+          proximity={0}
           shockRadius={0}
           shockStrength={0}
           resistance={750}
-          returnDuration={1.5}
+          returnDuration={0.2}
         />
       </div>
 
