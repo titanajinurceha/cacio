@@ -70,12 +70,12 @@ const VerifyForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center font-sans">
+    <div className="min-h-screen flex items-center justify-center font-sora">
       <form
         onSubmit={handleSubmit}
         className="bg-white border-3 shadow-[0px_3px_0px_rgba(0,0,0,1)] border-black rounded-2xl p-8 w-full max-w-md"
       >
-        <h2 className="text-3xl font-black text-black text-center">
+        <h2 className="text-3xl font-extrabold text-black text-center">
           Verify Your Information
         </h2>
         <h2 className="text-xl font-medium mb-4 text-gray-600 text-center">
