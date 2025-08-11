@@ -1,20 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState,useLayoutEffect, useEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
 import gsap from "gsap";
 
-const VerifyForm = () => {
+export default function VerifyForm() {
   const [formData, setFormData] = useState({ nama: "", nim: "" });
+  const navigate = useNavigate();
+  const { setUserInfo } = useUser();
+
+  const hasAnimated = useRef(false);
+  const location = useLocation();
   const [formErrors, setFormErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  
 
+  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error while typing
-    setFormErrors((prev) => ({ ...prev, [name]: "" }));
+    setFormErrors((prev) => ({ ...prev, [name]: "" })); // clear error while typing
   };
 
+  // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = {};
@@ -25,6 +34,7 @@ const VerifyForm = () => {
       setFormErrors(errors);
       return;
     }
+
     setLoading(true);
     setResult(null);
 
@@ -39,8 +49,23 @@ const VerifyForm = () => {
       });
 
       const data = await res.json();
+
+      if (!res.ok) {
+        setResult(data);
+        setShowModal(true);
+        setLoading(false);
+        return; // stop further execution
+      }
+
+      // If success:
       setResult(data);
       setShowModal(true);
+      if (data?.status === "success") {
+        setUserInfo(data.data);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1500);
+      }
     } catch (error) {
       console.error("Error verifying:", error);
       setResult({ status: "error", message: "Server error" });
@@ -50,30 +75,44 @@ const VerifyForm = () => {
     }
   };
 
+  // Animate modal
   useEffect(() => {
     if (showModal) {
       gsap.fromTo(
         ".modal",
         { opacity: 0, y: 100 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "elastic.out(1,0.5)", }
+        { opacity: 1, y: 0, duration: 0.6, ease: "elastic.out(1,0.5)" }
       );
     }
   }, [showModal]);
 
+  // Close modal animation
   const handleClose = () => {
     gsap.to(".modal", {
       opacity: 0,
       y: 100,
       duration: 0.3,
-      onComplete: () => setShowModal(false) // only hide after animation finishes
+      onComplete: () => setShowModal(false),
     });
   };
+
+  // Animate form on mount
+  useLayoutEffect(() => {
+    if (location.pathname === "/verify" && !hasAnimated.current) {
+      gsap.fromTo(
+        ".form",
+        { opacity: 0, y: 500 },
+        { opacity: 1, y: 0, duration: 1.5, ease: "elastic.out(1,0.5)" }
+      );
+      hasAnimated.current = true; // prevent future glitches
+    }
+  }, [location]);
 
   return (
     <div className="min-h-screen flex items-center justify-center font-sora">
       <form
         onSubmit={handleSubmit}
-        className="bg-white border-3 shadow-[0px_3px_0px_rgba(0,0,0,1)] border-black rounded-2xl p-8 w-full max-w-md"
+        className="form bg-white border-3 shadow-[0px_5px_0px_rgba(0,0,0,1)] border-black rounded-2xl p-8 w-full max-w-md"
       >
         <h2 className="text-3xl font-extrabold text-black text-center">
           Verify Your Information
@@ -85,51 +124,61 @@ const VerifyForm = () => {
         {/* Nama */}
         <div className="m-5">
           <label htmlFor="nama">
-            <span className="text-sm pl-2 font-semibold text-black"> NAMA<span className="text-[#ff4911]">*</span> </span>
+            <span className="text-sm pl-2 font-semibold text-black">
+              NAMA<span className="text-[#ff4911]">*</span>
+            </span>
             <input
               type="text"
               name="nama"
               id="nama"
               value={formData.nama}
               onChange={handleChange}
-              className={`text-black font-medium bg-white px-4 py-3 mt-0.5 w-full rounded-xl border-3 shadow-[0px_3px_0px_rgba(0,0,0,1)] sm:text-sm
+              className={`text-black font-medium bg-white px-4 py-3 mt-0.5 w-full rounded-xl border-3 shadow-[0px_5px_0px_rgba(0,0,0,1)] sm:text-sm
                 ${formErrors.nama ? "border-[#ff4911]" : "border-black"}
                 focus:bg-[#FFA6F6]`}
               placeholder="Masukkan Nama"
             />
             {formErrors.nama && (
-            <p className="text-[#ff4911] pl-2 text-xs mt-1">{formErrors.nama}</p>
-          )}
+              <p className="text-[#ff4911] pl-2 text-xs mt-1">
+                {formErrors.nama}
+              </p>
+            )}
           </label>
         </div>
 
         {/* NIM */}
         <div className="m-5">
           <label htmlFor="nim">
-            <span className="text-sm pl-2 font-semibold text-black"> NIM<span className="text-[#ff4911]">*</span> </span>
+            <span className="text-sm pl-2 font-semibold text-black">
+              NIM<span className="text-[#ff4911]">*</span>
+            </span>
             <input
               type="text"
               name="nim"
               id="nim"
               value={formData.nim}
               onChange={handleChange}
-              className={`text-black bg-white font-medium px-4 py-3 mt-0.5 w-full rounded-xl border-3 shadow-[0px_3px_0px_rgba(0,0,0,1)] sm:text-sm
+              className={`text-black bg-white font-medium px-4 py-3 mt-0.5 w-full rounded-xl border-3 shadow-[0px_5px_0px_rgba(0,0,0,1)] sm:text-sm
                 ${formErrors.nim ? "border-[#ff4911]" : "border-black"}
                 focus:bg-[#FFA6F6]`}
               placeholder="Masukkan NIM"
             />
             {formErrors.nim && (
-            <p className="text-[#ff4911] pl-2 text-xs mt-1">{formErrors.nim}</p>
-          )}
+              <p className="text-[#ff4911] pl-2 text-xs mt-1">
+                {formErrors.nim}
+              </p>
+            )}
           </label>
         </div>
+
+        {/* Submit button */}
         <button
           type="submit"
           disabled={loading}
           className="w-2/5 mx-auto block border-2 border-black bg-[#FFC730]
-          shadow-[0px_2px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[0px_4px_0px_rgba(0,0,0,1)] 
+          shadow-[0px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[0px_6px_0px_rgba(0,0,0,1)] 
           active:-translate-y-0 disabled:-translate-y-0
-          active:shadow-[0px_2px_0px_rgba(0,0,0,1)] disabled:shadow-[0px_2px_0px_rgba(0,0,0,1)]
+          active:shadow-[0px_4px_0px_rgba(0,0,0,1)] disabled:shadow-[0px_4px_0px_rgba(0,0,0,1)]
         text-black font-semibold py-2.5 px-4 rounded-full transition duration-300 disabled:opacity-50"
         >
           {loading ? "Verifying..." : "Verify"}
@@ -139,43 +188,35 @@ const VerifyForm = () => {
       {/* Modal */}
       {showModal && (
         <div className="modal fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-[#F75B2B] border-3 border-black shadow-[0px_2px_0px_rgba(0,0,0,1)] p-6 text-white rounded-xl w-96">
+          <div className="bg-[#F75B2B] border-3 border-black shadow-[0px_4px_0px_rgba(0,0,0,1)] p-6 text-white rounded-xl w-96">
             {result?.status === "success" ? (
               <>
-                <h3 className="text-xl text-center font-bold mb-4">Verification Success</h3>
-                <ul className="text-sm space-y-1">
-                  <li><strong>Nama:</strong> {result.data.name}</li>
-                  <li><strong>NIM:</strong> {result.data.nim}</li>
-                  <li><strong>Jenis Kelamin:</strong> {result.data.jenis_kelamin}</li>
-                  <li><strong>Jenis Daftar:</strong> {result.data.jenis_daftar}</li>
-                  <li><strong>Nama PT:</strong> {result.data.nama_pt}</li>
-                  <li><strong>Prodi:</strong> {result.data.nama_prodi}</li>
-                  <li><strong>Jenjang:</strong> {result.data.jenjang}</li>
-                  <li><strong>Tanggal Masuk:</strong> {result.data.tanggal_masuk}</li>
-                  <li><strong>Status:</strong> {result.data.status}</li>
-                </ul>
+                <h3 className="text-xl text-center font-bold mb-4">
+                  Verification Success
+                </h3>
+                <p className="text-center">Redirecting to dashboard...</p>
               </>
             ) : (
               <>
-                <h3 className="text-xl text-center font-bold mb-4">Verification Failed</h3>
+                <h3 className="text-xl text-center font-bold mb-4">
+                  Verification Failed
+                </h3>
                 <p className="text-white text-center">Data tidak cocok</p>
+                <button
+                  onClick={handleClose}
+                  className="bg-black w-2/5 mt-4 mx-auto block border-2 border-black
+                  shadow-[0px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[0px_6px_0px_rgba(0,0,0,1)] 
+                  active:-translate-y-0 disabled:-translate-y-0
+                  active:shadow-[0px_4px_0px_rgba(0,0,0,1)] disabled:shadow-[0px_4px_0px_rgba(0,0,0,1)]
+                text-white font-semibold py-2.5 px-4 rounded-full transition duration-300 disabled:opacity-50"
+                >
+                  Close
+                </button>
               </>
             )}
-            <button
-              onClick={handleClose}
-              className="bg-black w-2/5 mt-4 mx-auto block border-2 border-black
-              shadow-[0px_2px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[0px_4px_0px_rgba(0,0,0,1)] 
-              active:-translate-y-0 disabled:-translate-y-0
-              active:shadow-[0px_2px_0px_rgba(0,0,0,1)] disabled:shadow-[0px_2px_0px_rgba(0,0,0,1)]
-            text-white font-semibold py-2.5 px-4 rounded-full transition duration-300 disabled:opacity-50"
-            >
-              Close
-            </button>
           </div>
         </div>
       )}
     </div>
   );
-};
-
-export default VerifyForm;
+}

@@ -35,7 +35,7 @@ def verify_student():
     return jsonify({
     "status": "not_found",
     "hint": f"Found: {[s['nim'] for s in search_result]}"
-    }), 404
+    })
 
 @app.route("/")
 def home():
