@@ -29,7 +29,7 @@ export default function VerifyPage() {
           <img
             src={graduationImg}
             alt="Graduation"
-            className="hidden min-[1200px]:w-100 min-[950px]:block fixed bottom-0 right-0 w-64 h-auto select-none pointer-events-none"
+            className="hidden min-[1200px]:w-100 min-[950px]:block fixed bottom-0 left-0 w-64 h-auto select-none pointer-events-none"
           />
         </div>
   );

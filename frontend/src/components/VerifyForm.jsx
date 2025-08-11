@@ -188,16 +188,18 @@ export default function VerifyForm() {
       {/* Modal */}
       {showModal && (
         <div className="modal fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-[#F75B2B] border-3 border-black shadow-[0px_4px_0px_rgba(0,0,0,1)] p-6 text-white rounded-xl w-96">
             {result?.status === "success" ? (
               <>
+              <div className="bg-[#2ED1A4] border-3 border-black shadow-[0px_4px_0px_rgba(0,0,0,1)] p-6 text-white rounded-xl w-96">
                 <h3 className="text-xl text-center font-bold mb-4">
                   Verification Success
                 </h3>
                 <p className="text-center">Redirecting to dashboard...</p>
+              </div>
               </>
             ) : (
               <>
+              <div className="bg-[#F75B2B] border-3 border-black shadow-[0px_4px_0px_rgba(0,0,0,1)] p-6 text-white rounded-xl w-96">
                 <h3 className="text-xl text-center font-bold mb-4">
                   Verification Failed
                 </h3>
@@ -212,9 +214,9 @@ export default function VerifyForm() {
                 >
                   Close
                 </button>
+                </div>
               </>
             )}
-          </div>
         </div>
       )}
     </div>
