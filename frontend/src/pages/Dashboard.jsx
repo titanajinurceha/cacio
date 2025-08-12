@@ -56,46 +56,46 @@ export default function Dashboard() {
       {/* Sidebar: User Info */}
       <aside
         ref={sidebarRef}
-        className="w-full md:w-1/4 p-6 bg-white border-3 border-black shadow-[0_5px_0_rgba(0,0,0,1)] md:min-h-screen"
+        className="w-full md:w-[30%] md:min-w-[330px] md:max-w-[400px] p-6 bg-white border-b-3 md:border-b-0 md:border-r-3 border-black shadow-[0_5px_0_rgba(0,0,0,1)] md:min-h-screen"
       >
         <h2 className="text-2xl font-extrabold text-black mb-4">My Profile</h2>
         <div className="bg-[#F75B2B] text-white p-4 rounded-xl border-3 border-black shadow-[0_4px_0_rgba(0,0,0,1)]">
-          <ul className="text-sm space-y-3">
-            <li className="grid grid-cols-[120px_1fr] gap-2 items-baseline">
+          <ul className="text-sm md:text-base space-y-4">
+            <li className="grid grid-cols-[minmax(120px,auto)_1fr] gap-2 items-baseline">
               <strong className="font-semibold">Nama</strong>
-              <span>: {userInfo.name || userInfo.nama || "N/A"}</span>
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap">: {userInfo.name || userInfo.nama || "N/A"}</span>
             </li>
-            <li className="grid grid-cols-[120px_1fr] gap-2 items-baseline">
+            <li className="grid grid-cols-[minmax(120px,auto)_1fr] gap-2 items-baseline">
               <strong className="font-semibold">NIM</strong>
-              <span>: {userInfo.nim || "N/A"}</span>
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap">: {userInfo.nim || "N/A"}</span>
             </li>
-            <li className="grid grid-cols-[120px_1fr] gap-2 items-baseline">
+            <li className="grid grid-cols-[minmax(120px,auto)_1fr] gap-2 items-baseline">
               <strong className="font-semibold">Jenis Kelamin</strong>
-              <span>: {userInfo.jenis_kelamin || "N/A"}</span>
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap">: {userInfo.jenis_kelamin || "N/A"}</span>
             </li>
-            <li className="grid grid-cols-[120px_1fr] gap-2 items-baseline">
+            <li className="grid grid-cols-[minmax(120px,auto)_1fr] gap-2 items-baseline">
               <strong className="font-semibold">Jenis Daftar</strong>
-              <span>: {userInfo.jenis_daftar || "N/A"}</span>
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap">: {userInfo.jenis_daftar || "N/A"}</span>
             </li>
-            <li className="grid grid-cols-[120px_1fr] gap-2 items-baseline">
+            <li className="grid grid-cols-[minmax(120px,auto)_1fr] gap-2 items-baseline">
               <strong className="font-semibold">Nama PT</strong>
-              <span>: {userInfo.nama_pt || "N/A"}</span>
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap">: {userInfo.nama_pt || "N/A"}</span>
             </li>
-            <li className="grid grid-cols-[120px_1fr] gap-2 items-baseline">
+            <li className="grid grid-cols-[minmax(120px,auto)_1fr] gap-2 items-baseline">
               <strong className="font-semibold">Prodi</strong>
-              <span>: {userInfo.nama_prodi || "N/A"}</span>
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap">: {userInfo.nama_prodi || "N/A"}</span>
             </li>
-            <li className="grid grid-cols-[120px_1fr] gap-2 items-baseline">
+            <li className="grid grid-cols-[minmax(120px,auto)_1fr] gap-2 items-baseline">
               <strong className="font-semibold">Jenjang</strong>
-              <span>: {userInfo.jenjang || "N/A"}</span>
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap">: {userInfo.jenjang || "N/A"}</span>
             </li>
-            <li className="grid grid-cols-[120px_1fr] gap-2 items-baseline">
+            <li className="grid grid-cols-[minmax(120px,auto)_1fr] gap-2 items-baseline">
               <strong className="font-semibold">Tanggal Masuk</strong>
-              <span>: {formatDate(userInfo.tanggal_masuk)}</span>
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap">: {formatDate(userInfo.tanggal_masuk)}</span>
             </li>
-            <li className="grid grid-cols-[120px_1fr] gap-2 items-baseline">
+            <li className="grid grid-cols-[minmax(120px,auto)_1fr] gap-2 items-baseline">
               <strong className="font-semibold">Status</strong>
-              <span>: {userInfo.status || "N/A"}</span>
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap">: {userInfo.status || "N/A"}</span>
             </li>
           </ul>
         </div>
