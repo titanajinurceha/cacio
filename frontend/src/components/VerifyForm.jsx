@@ -139,7 +139,7 @@ export default function VerifyForm() {
               placeholder="Masukkan Nama"
             />
             {formErrors.nama && (
-              <p className="text-[#ff4911] pl-2 text-xs mt-1">
+              <p className="text-[#ff4911] pl-2 text-xs mt-2">
                 {formErrors.nama}
               </p>
             )}
@@ -164,7 +164,7 @@ export default function VerifyForm() {
               placeholder="Masukkan NIM"
             />
             {formErrors.nim && (
-              <p className="text-[#ff4911] pl-2 text-xs mt-1">
+              <p className="text-[#ff4911] pl-2 text-xs mt-2">
                 {formErrors.nim}
               </p>
             )}
