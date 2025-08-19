@@ -1,4 +1,4 @@
-import { useState,useLayoutEffect, useEffect, useRef } from "react";
+import { useState, useLayoutEffect, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
 import gsap from "gsap";
@@ -14,7 +14,6 @@ export default function VerifyForm() {
   const [showModal, setShowModal] = useState(false);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  
 
   // Handle input change
   const handleChange = (e) => {
@@ -175,7 +174,7 @@ export default function VerifyForm() {
         <button
           type="submit"
           disabled={loading}
-          className="w-2/5 mx-auto block border-2 border-black bg-[#FFC730]
+          className="w-2/5 mx-auto block border-2 border-black bg-[#FF4911]
           shadow-[0px_4px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[0px_6px_0px_rgba(0,0,0,1)] 
           active:-translate-y-0 disabled:-translate-y-0
           active:shadow-[0px_4px_0px_rgba(0,0,0,1)] disabled:shadow-[0px_4px_0px_rgba(0,0,0,1)]
@@ -188,17 +187,17 @@ export default function VerifyForm() {
       {/* Modal */}
       {showModal && (
         <div className="modal fixed inset-0 flex items-center justify-center z-50">
-            {result?.status === "success" ? (
-              <>
+          {result?.status === "success" ? (
+            <>
               <div className="bg-[#2ED1A4] border-3 border-black shadow-[0px_4px_0px_rgba(0,0,0,1)] p-6 text-white rounded-xl w-96">
                 <h3 className="text-xl text-center font-bold mb-4">
                   Verification Success
                 </h3>
                 <p className="text-center">Redirecting to dashboard...</p>
               </div>
-              </>
-            ) : (
-              <>
+            </>
+          ) : (
+            <>
               <div className="bg-[#F75B2B] border-3 border-black shadow-[0px_4px_0px_rgba(0,0,0,1)] p-6 text-white rounded-xl w-96">
                 <h3 className="text-xl text-center font-bold mb-4">
                   Verification Failed
@@ -214,9 +213,9 @@ export default function VerifyForm() {
                 >
                   Close
                 </button>
-                </div>
-              </>
-            )}
+              </div>
+            </>
+          )}
         </div>
       )}
     </div>

@@ -2,7 +2,6 @@ import VerifyForm from "../components/VerifyForm";
 import DotGrid from "../reactbits/DotGrid";
 import {useLocation } from "react-router-dom";
 import {useLayoutEffect, useRef} from "react";
-import graduationImg from '../assets/graduation.svg';
 import gsap from "gsap";
 
 
@@ -41,7 +40,7 @@ export default function VerifyPage() {
             <DotGrid
               dotSize={3}
               gap={15}
-              baseColor="#5227FF"
+              baseColor="#1c1c1c"
               activeColor="#5227FF"
               proximity={0}
               shockRadius={0}
@@ -55,13 +54,6 @@ export default function VerifyPage() {
           <div className="relative z-10 flex items-center justify-center h-full">
             <VerifyForm />
           </div>
-    
-          {/* Decorative Image */}
-          <img
-            src={graduationImg}
-            alt="Graduation"
-            className="left-image hidden min-[1200px]:w-100 min-[950px]:block fixed bottom-0 left-0 w-64 h-auto select-none pointer-events-none"
-          />
         </div>
   );
 }
